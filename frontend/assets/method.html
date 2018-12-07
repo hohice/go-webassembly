@@ -28,7 +28,9 @@ license that can be found in the LICENSE file.
 		WebAssembly.instantiateStreaming(fetch("../wasm/frontend.wasm"), go.importObject).then(async (result) => {
 			mod = result.module;
 			inst = result.instance;
+			document.getElementById("fetchButton").disabled = false;
 			await go.run(inst)
+			//inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
 		});
 
 	</script>
@@ -40,6 +42,10 @@ license that can be found in the LICENSE file.
 	<button onClick="subtract('value1', 'value2', 'result');" id="subtractButton">Subtract</button>
 
 	<input type="text" id="result">
+	<div id="sum" > </div>
+	<div id="fetch">
+	<button onClick="fetch();" id="fetchButton" disabled>fetch</button>
+	</div>
 
 </body>
 

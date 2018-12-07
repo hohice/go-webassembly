@@ -14,14 +14,17 @@ import (
 //go:generate bash -c "go run assets_generate.go"
 
 func registerCallbacks() {
+	//use package method
 	js.Global().Set("add", js.NewCallback(method.Add))
 	js.Global().Set("subtract", js.NewCallback(method.Subtract))
+	js.Global().Set("fetch", js.NewCallback(method.Fetch))
 }
 
 func main() {
 	c := make(chan struct{}, 0)
 
 	println("WASM Go Initialized")
+	method.Sum()
 	// register functions
 	registerCallbacks()
 	<-c
